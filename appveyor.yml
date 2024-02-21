@@ -16,7 +16,7 @@ install:
 - pip install PyInstaller
 
 build_script:
-- flet pack main.py
+- flet pack main.py --name aiprompt --product-name aiprompt
 
 # Publish artifacts to GitHub Releases on "tag" builds
 deploy:
