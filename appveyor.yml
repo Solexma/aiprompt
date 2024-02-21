@@ -18,8 +18,6 @@ install:
 build_script:
 - flet pack main.py
 
-test: off
-
 # Publish artifacts to GitHub Releases on "tag" builds
 deploy:
   provider: GitHub
