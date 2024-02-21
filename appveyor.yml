@@ -1,21 +1,22 @@
-image:
-- Visual Studio 2019
-- macOS
-- Ubuntu
-
+version: 1.0.{build}
+skip_non_tags: true
 skip_branch_with_pr: true
-stack: python 3.10
-
-environment:
-  GITHUB_TOKEN:
-    secure: Ti46nPnZgFh0nRteU6ma0EhJnCTW7PaMn9hnnewZl4gBFPyRQnXNCwGog02+MRLX
+image:
+- macOS-Sonoma
+- Visual Studio 2022
+- Ubuntu2204
+clone_depth: 1
+build:
+  verbosity: minimal
+test: off
+stack: python 3.11
 
 install:
 - pip install -r requirements.txt
 - pip install PyInstaller
 
 build_script:
-- flet pack main.py --name counter --icon icon.png --product-name counter --product-version "1.2.3" --copyright "Copyright (c) 2022 YourCompany Inc."
+- flet pack main.py
 
 test: off
 
@@ -33,13 +34,13 @@ for:
 -
   matrix:
     only:
-    - image: Visual Studio 2019
+    - image: Visual Studio 2022
 
   after_build:
-  - 7z a counter-windows.zip %CD%\dist\*.exe
+  - 7z a aiprompt-windows.zip %CD%\dist\*.exe
 
   artifacts:
-  - path: counter-windows.zip
+  - path: aiprompt-windows.zip
 
 #
 #   macOS package
@@ -47,13 +48,13 @@ for:
 -
   matrix:
     only:
-    - image: macOS
+    - image: macOS-Sonoma
 
   after_build:
-  - tar -czvf counter-macos.tar.gz -C dist counter.app
+  - tar -czvf aiprompt-macos.tar.gz -C dist aiprompt.app
 
   artifacts:
-  - path: counter-macos.tar.gz
+  - path: aiprompt-macos.tar.gz
 
 #
 #   Linux package
@@ -61,10 +62,10 @@ for:
 -
   matrix:
     only:
-    - image: Ubuntu
+    - image: Ubuntu2204
 
   after_build:
-  - tar -czvf counter-linux.tar.gz -C dist counter
+  - tar -czvf aiprompt-linux.tar.gz -C dist aiprompt
 
   artifacts:
-  - path: counter-linux.tar.gz
+  - path: aiprompt-linux.tar.gz
