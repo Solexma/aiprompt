@@ -10,3 +10,5 @@
 pip install -r requirements.txt
 python main.py
 ```
+
+Details on the [Wiki](https://github.com/Solexma/aiprompt/wiki)
