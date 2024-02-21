@@ -52,6 +52,8 @@ def main(page: ft.Page):
     load_settings(None)
 
     def save_settings(e):
+        yaml_data = dict()
+        yaml_data['settings'] = dict()
         yaml_data['settings']['prefix'] = prefix.value
         yaml_data['settings']['suffix'] = suffix.value
         with open(current_path+"/promptmaker.yml", 'w') as stream:
