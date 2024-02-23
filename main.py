@@ -25,7 +25,8 @@ def main(page: ft.Page):
     
     subjects = ft.TextField(
         label="Paste here the subjects, one per line",
-        multiline=True
+        multiline=True,
+        max_lines=13
     )
 
     suffix = ft.TextField(
