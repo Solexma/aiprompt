@@ -1,5 +1,5 @@
 # Midjourney Companion
-![Static Badge](https://img.shields.io/badge/python_tested_versions-3.8.0_%7C_3.11.7-blue)
+![Static Badge](https://img.shields.io/badge/python_tested_versions-3.8.0_%7C_3.11.7-blue) [![Build status](https://ci.appveyor.com/api/projects/status/le4qjygw7i2qdr6q?svg=true)](https://ci.appveyor.com/project/MiPnamic/aiprompt)
 
 ## Dependencies
 - [flet](https://github.com/flet-dev/flet) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/flet)
