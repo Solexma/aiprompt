@@ -3,7 +3,7 @@ import os
 import yaml
 
 def main(page: ft.Page):
-    yaml_data = None
+    yaml_data = dict()
     current_path = os.getcwd()
 
     page.snack_bar = ft.SnackBar(
@@ -21,21 +21,27 @@ def main(page: ft.Page):
 
     prefix = ft.TextField(
         label="Prefix",
+        hint_text="high quality sticker logo of",
     )
     
     subjects = ft.TextField(
         label="Paste here the subjects, one per line",
+        hint_text="a monkey\na dog\na cat",
         multiline=True,
         max_lines=13
     )
 
     suffix = ft.TextField(
         label="Suffix",
+        hint_text="vibrant illustration, stencil, flat white background",
     )
 
-    def load_settings(e):
-        with open(current_path+"/promptmaker.yml", 'r') as stream:
-            yaml_data = yaml.safe_load(stream)
+    def load_settings(e, autoload=False):
+        load_from_file = False
+        if os.path.isfile(current_path+'/promptmaker.yml'):
+            with open(current_path+"/promptmaker.yml", 'r') as stream:
+                yaml_data = yaml.safe_load(stream)
+                load_from_file = True
         try:
             yaml_prefix = yaml_data['settings']['prefix']
             prefix.value = yaml_prefix
@@ -46,11 +52,15 @@ def main(page: ft.Page):
             suffix.value = yaml_suffix
         except:
             suffix.value = "black and white, coloring book style --ar 2:3"
-        page.snack_bar.content = ft.Text("Settings loaded!")
-        page.snack_bar.open = True
-        page.update()
+        if load_from_file:
+            page.snack_bar.content = ft.Text("Settings loaded!")
+        else:
+            page.snack_bar.content = ft.Text("Settings file missing!")
+        if not autoload:
+            page.snack_bar.open = True
+            page.update()
 
-    load_settings(None)
+    load_settings(None, True)
 
     def save_settings(e):
         yaml_data = dict()
